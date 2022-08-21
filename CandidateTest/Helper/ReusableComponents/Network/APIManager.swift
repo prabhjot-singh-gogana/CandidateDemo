@@ -17,7 +17,7 @@ enum URLEnum {
     var value: String {
         switch self {
         case .list:
-            return "/contentList.json"
+            return "/giftcards/api/giftcards"
         }
     }
 }
@@ -28,7 +28,6 @@ final class APIManager<T: PSJsonDecoding> {
         case GET = "GET"
     }
     private var request: PSJsonRequest!
-    private var fromKey: String?
     var failureError = BehaviorRelay<AFError?>.init(value: nil)
     
     private init(builder: PSJsonRequest) {
@@ -62,10 +61,6 @@ final class APIManager<T: PSJsonDecoding> {
         self.request.method = (methods == Method.GET) ? .get: .post
         return self
     }
-    func addKey(fromResponseJson key: String) -> APIManager<T> {
-        self.fromKey = key
-        return self
-    }
 
     var response: Observable<T?> {
         return self.request.jsonResponse()
@@ -79,11 +74,11 @@ final class APIManager<T: PSJsonDecoding> {
                 }
             })
             .map({ (result) -> T? in
-                guard let jsonResponse = result.value as? [String: AnyObject] else {
+                guard let jsonResponse = result.value else {
                     self.failureError.accept(AFError.responseSerializationFailed(reason: .customSerializationFailed(error: PSError.jsonDataIsNotDictionary)))
                     return nil
                 }
-                guard let nsiResponse = T.decode(dict: jsonResponse, from: self.fromKey) else {
+                guard let nsiResponse = T.decode(object: jsonResponse) else {
                     self.failureError.accept(AFError.responseSerializationFailed(reason: .decodingFailed(error: PSError.dictionaryIsNotDecodable)))
                     return nil
                 }
@@ -102,11 +97,11 @@ final class APIManager<T: PSJsonDecoding> {
                 }
             })
             .map({ (result) -> [T]? in
-                guard let jsonResponse = result.value as? [String: AnyObject] else {
+                guard let jsonResponse = result.value else {
                     self.failureError.accept(AFError.responseSerializationFailed(reason: .customSerializationFailed(error: PSError.jsonDataIsNotDictionary)))
                     return nil
                 }
-                guard let nsiResponse = T.arrayDecoding(dict: jsonResponse, from: self.fromKey) else {
+                guard let nsiResponse = T.arrayDecoding(object: jsonResponse) else {
                     self.failureError.accept(AFError.responseSerializationFailed(reason: .decodingFailed(error: PSError.dictionaryIsNotDecodable)))
                     return nil
                 }

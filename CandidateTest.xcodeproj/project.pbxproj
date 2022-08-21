@@ -26,7 +26,6 @@
 		EEBFC97428B1E05B007AEF5D /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBFC96E28B1E05B007AEF5D /* APIManager.swift */; };
 		EEBFC97528B1E05B007AEF5D /* PSJsonRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBFC96F28B1E05B007AEF5D /* PSJsonRequest.swift */; };
 		EEBFC97628B1E05B007AEF5D /* ExtensionViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBFC97128B1E05B007AEF5D /* ExtensionViews.swift */; };
-		EEBFC97C28B21E79007AEF5D /* PSRefresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBFC97B28B21E79007AEF5D /* PSRefresher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,7 +73,6 @@
 		EEBFC96E28B1E05B007AEF5D /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		EEBFC96F28B1E05B007AEF5D /* PSJsonRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PSJsonRequest.swift; sourceTree = "<group>"; };
 		EEBFC97128B1E05B007AEF5D /* ExtensionViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionViews.swift; sourceTree = "<group>"; };
-		EEBFC97B28B21E79007AEF5D /* PSRefresher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSRefresher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -263,7 +261,6 @@
 		EEBFC96A28B1E05B007AEF5D /* ReusableComponents */ = {
 			isa = PBXGroup;
 			children = (
-				EEBFC97A28B21E61007AEF5D /* PSRefresher */,
 				EEBFC96B28B1E05B007AEF5D /* Network */,
 			);
 			path = ReusableComponents;
@@ -304,14 +301,6 @@
 				EEBFC92328B108C3007AEF5D /* AppDelegate.swift */,
 			);
 			name = SupportingFiles;
-			sourceTree = "<group>";
-		};
-		EEBFC97A28B21E61007AEF5D /* PSRefresher */ = {
-			isa = PBXGroup;
-			children = (
-				EEBFC97B28B21E79007AEF5D /* PSRefresher.swift */,
-			);
-			path = PSRefresher;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -495,7 +484,6 @@
 			files = (
 				EEBFC97428B1E05B007AEF5D /* APIManager.swift in Sources */,
 				EEBFC95D28B1DAF2007AEF5D /* GiftListVM.swift in Sources */,
-				EEBFC97C28B21E79007AEF5D /* PSRefresher.swift in Sources */,
 				EEBFC95F28B1DAFE007AEF5D /* Gift.swift in Sources */,
 				EEBFC96828B1DEF2007AEF5D /* CellForGiftList.swift in Sources */,
 				EEBFC96528B1DB60007AEF5D /* DetailOfGiftVC.swift in Sources */,

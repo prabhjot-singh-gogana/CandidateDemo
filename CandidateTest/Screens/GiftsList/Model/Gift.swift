@@ -27,8 +27,7 @@ struct Gift: Codable, PSJsonDecoding {
 // MARK: - Denomination
 struct Denomination: Codable, PSJsonDecoding {
     typealias PSMapperModel = Denomination
-    
-    var price: Int?
+    var price: Double?
     var currency, stock: String?
     
     init() {
