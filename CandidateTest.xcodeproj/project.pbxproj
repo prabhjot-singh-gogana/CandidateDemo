@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		050BED929A8E352C7D299928 /* libPods-CandidateTest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AAD5CF64729AC832A85AA6C /* libPods-CandidateTest.a */; };
 		EB9188BD9567274AD2F9BBEA /* libPods-CandidateTestTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 467151B08DD821BD6FB95F4C /* libPods-CandidateTestTests.a */; };
+		EEB8DA6828B39BE50076B9D9 /* HeaderCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB8DA6728B39BE50076B9D9 /* HeaderCardView.swift */; };
 		EEBFC92428B108C3007AEF5D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBFC92328B108C3007AEF5D /* AppDelegate.swift */; };
 		EEBFC92D28B108C5007AEF5D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEBFC92C28B108C5007AEF5D /* Assets.xcassets */; };
 		EEBFC93028B108C5007AEF5D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEBFC92E28B108C5007AEF5D /* LaunchScreen.storyboard */; };
@@ -26,6 +27,7 @@
 		EEBFC97428B1E05B007AEF5D /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBFC96E28B1E05B007AEF5D /* APIManager.swift */; };
 		EEBFC97528B1E05B007AEF5D /* PSJsonRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBFC96F28B1E05B007AEF5D /* PSJsonRequest.swift */; };
 		EEBFC97628B1E05B007AEF5D /* ExtensionViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBFC97128B1E05B007AEF5D /* ExtensionViews.swift */; };
+		EEC6114828B5124D00CC8EEF /* DenominationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC6114728B5124D00CC8EEF /* DenominationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +54,7 @@
 		5E76D31B0465F1A50733D548 /* Pods-CandidateTestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CandidateTestTests.release.xcconfig"; path = "Target Support Files/Pods-CandidateTestTests/Pods-CandidateTestTests.release.xcconfig"; sourceTree = "<group>"; };
 		7CA63325C1FDA4EA1BF8FB98 /* Pods-CandidateTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CandidateTest.release.xcconfig"; path = "Target Support Files/Pods-CandidateTest/Pods-CandidateTest.release.xcconfig"; sourceTree = "<group>"; };
 		D0716A2CCE1CFC4819E332C4 /* Pods-CandidateTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CandidateTest.debug.xcconfig"; path = "Target Support Files/Pods-CandidateTest/Pods-CandidateTest.debug.xcconfig"; sourceTree = "<group>"; };
+		EEB8DA6728B39BE50076B9D9 /* HeaderCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCardView.swift; sourceTree = "<group>"; };
 		EEBFC92028B108C3007AEF5D /* CandidateTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CandidateTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEBFC92328B108C3007AEF5D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EEBFC92C28B108C5007AEF5D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -73,6 +76,7 @@
 		EEBFC96E28B1E05B007AEF5D /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		EEBFC96F28B1E05B007AEF5D /* PSJsonRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PSJsonRequest.swift; sourceTree = "<group>"; };
 		EEBFC97128B1E05B007AEF5D /* ExtensionViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionViews.swift; sourceTree = "<group>"; };
+		EEC6114728B5124D00CC8EEF /* DenominationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DenominationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +124,14 @@
 				5E76D31B0465F1A50733D548 /* Pods-CandidateTestTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		EEB8DA6628B398940076B9D9 /* HeaderCardView */ = {
+			isa = PBXGroup;
+			children = (
+				EEB8DA6728B39BE50076B9D9 /* HeaderCardView.swift */,
+			);
+			path = HeaderCardView;
 			sourceTree = "<group>";
 		};
 		EEBFC91728B108C3007AEF5D = {
@@ -228,6 +240,10 @@
 		EEBFC95928B1D938007AEF5D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				EEC6114628B511D200CC8EEF /* ExtendedSectionView */,
+				EEC6114528B5119A00CC8EEF /* AddButtonView */,
+				EEC6114428B5116F00CC8EEF /* DenominationView */,
+				EEB8DA6628B398940076B9D9 /* HeaderCardView */,
 				EEBFC96428B1DB60007AEF5D /* DetailOfGiftVC.swift */,
 			);
 			path = View;
@@ -301,6 +317,28 @@
 				EEBFC92328B108C3007AEF5D /* AppDelegate.swift */,
 			);
 			name = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		EEC6114428B5116F00CC8EEF /* DenominationView */ = {
+			isa = PBXGroup;
+			children = (
+				EEC6114728B5124D00CC8EEF /* DenominationView.swift */,
+			);
+			path = DenominationView;
+			sourceTree = "<group>";
+		};
+		EEC6114528B5119A00CC8EEF /* AddButtonView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AddButtonView;
+			sourceTree = "<group>";
+		};
+		EEC6114628B511D200CC8EEF /* ExtendedSectionView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ExtendedSectionView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -482,6 +520,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEB8DA6828B39BE50076B9D9 /* HeaderCardView.swift in Sources */,
 				EEBFC97428B1E05B007AEF5D /* APIManager.swift in Sources */,
 				EEBFC95D28B1DAF2007AEF5D /* GiftListVM.swift in Sources */,
 				EEBFC95F28B1DAFE007AEF5D /* Gift.swift in Sources */,
@@ -490,6 +529,7 @@
 				EEBFC97228B1E05B007AEF5D /* PSJsonEncDec.swift in Sources */,
 				EEBFC97328B1E05B007AEF5D /* PSConfiguration.swift in Sources */,
 				EEBFC96128B1DB25007AEF5D /* GiftListVC.swift in Sources */,
+				EEC6114828B5124D00CC8EEF /* DenominationView.swift in Sources */,
 				EEBFC96328B1DB42007AEF5D /* DetailOfGiftVM.swift in Sources */,
 				EEBFC97528B1E05B007AEF5D /* PSJsonRequest.swift in Sources */,
 				EEBFC92428B108C3007AEF5D /* AppDelegate.swift in Sources */,
