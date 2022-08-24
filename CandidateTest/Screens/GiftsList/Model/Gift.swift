@@ -29,7 +29,7 @@ struct Denomination: Codable, PSJsonDecoding {
     typealias PSMapperModel = Denomination
     var price: Double?
     var currency, stock: String?
-    
+    var isSelected:Bool? = false
     init() {
         
     }

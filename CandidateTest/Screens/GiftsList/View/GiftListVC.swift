@@ -8,14 +8,13 @@
 import RxSwift
 import RxCocoa
 
-class GiftListVC: UIViewController {
+final class GiftListVC: UIViewController {
     private let disposeBag = DisposeBag()
     var giftListViewModel = GiftListVM()
     var tableViewGifts = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Do any additional setup after loading the view.
         navigationItem.title = "Gifts"
         bindUI()
@@ -55,33 +54,36 @@ class GiftListVC: UIViewController {
     func bindTableView() {
         // binding the table with items
         self.giftListViewModel.giftList$.compactMap({$0}).bind(to: self.tableViewGifts.rx.items(cellIdentifier: String(describing: CellForGiftList.self), cellType: CellForGiftList.self)) {index, model,cell in
-            cell.gifts = model
+            cell.gift = model
         }.disposed(by: self.disposeBag)
         
         
         //        selection of row
         self.tableViewGifts.rx.modelSelected(Gift.self)
             .subscribe(on: MainScheduler.instance)
-            .subscribe(onNext: { (gift) in
+            .subscribe(onNext: { [weak self] (gift) in
                 //whole object here to show all the gifts on next screen
-                print(gift)
+                self?.toDetailVC(gift: gift)
             }).disposed(by: self.disposeBag)
     }
 
+    func toDetailVC(gift: Gift) {
+        let detailVC = DetailOfGiftVC()
+        detailVC.detailOfGiftVM.gift = gift
+        self.navigationController?.pushViewController(detailVC, animated: true)
+    }
     
     //initialising the tableview and setup its constraints
     func setupTableView() {
-        self.tableViewGifts.backgroundColor = .white
         self.view.addSubview(self.tableViewGifts)
+        self.tableViewGifts.backgroundColor = .white
         self.tableViewGifts.translatesAutoresizingMaskIntoConstraints = false
         self.tableViewGifts.topAnchor.constraint(equalTo:view.safeAreaLayoutGuide.topAnchor).isActive = true
         self.tableViewGifts.leftAnchor.constraint(equalTo:view.safeAreaLayoutGuide.leftAnchor).isActive = true
         self.tableViewGifts.rightAnchor.constraint(equalTo:view.safeAreaLayoutGuide.rightAnchor).isActive = true
         self.tableViewGifts.bottomAnchor.constraint(equalTo:view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        self.tableViewGifts.separatorStyle = .none
+        self.tableViewGifts.rowHeight = 180
         self.tableViewGifts.register(CellForGiftList.self, forCellReuseIdentifier: String(describing: CellForGiftList.self))
-        self.tableViewGifts.rowHeight = UITableView.automaticDimension
-        self.tableViewGifts.estimatedRowHeight = 100
     }
-    
-    
 }

@@ -9,67 +9,6 @@ import UIKit
 
 // protocol created to not use extra parameters for identifier
 
-protocol ReusableIdentifier: AnyObject {
-    static var reusableIdentifier: String { get }
-    static var nibObject: UINib? { get }
-}
-
-extension ReusableIdentifier {
-    static var reusableIdentifier: String { return String(describing: Self.self) }
-    static var nibObject: UINib? { return UINib(nibName: String(describing: Self.self), bundle: nil) }
-}
-extension UITableView {
-
-    func preferredContentSizeOfTable() -> CGSize {
-        self.layoutIfNeeded()
-        return self.contentSize
-    }
-    
-    // for registering the table with generics
-    func registerReusableIDCell<T: UITableViewCell>(_: T.Type) where T: ReusableIdentifier {
-        if let nib = T.nibObject {
-            self.register(nib, forCellReuseIdentifier: T.reusableIdentifier)
-        } else {
-            self.register(T.self, forCellReuseIdentifier: T.reusableIdentifier)
-        }
-    }
-
-    func dequeueReusableIDCell<T: UITableViewCell>(indexPath: IndexPath) -> T where T: ReusableIdentifier {
-        return self.dequeueReusableCell(withIdentifier: T.reusableIdentifier, for: indexPath) as! T
-    }
-    
-    static func initCell<T: UITableViewCell>() -> T where T: ReusableIdentifier {
-        return UITableViewCell.init(style: .default, reuseIdentifier: T.reusableIdentifier) as! T
-    }
-
-    func registerReusableIDHeaderFooterView<T: UITableViewHeaderFooterView>(_: T.Type) where T: ReusableIdentifier {
-        if let nib = T.nibObject {
-            self.register(nib, forHeaderFooterViewReuseIdentifier: T.reusableIdentifier)
-        } else {
-            self.register(T.self, forHeaderFooterViewReuseIdentifier: T.reusableIdentifier)
-        }
-    }
-
-    func dequeueReusableIDHeaderFooterView<T: UITableViewHeaderFooterView>() -> T? where T: ReusableIdentifier {
-        return self.dequeueReusableHeaderFooterView(withIdentifier: T.reusableIdentifier) as! T?
-    }
-}
-
-// ------------- Tab Bar Controller --------------//
-
-extension UITabBarController {
-    func findController<T: UIViewController>() -> T? {
-        for controller in self.viewControllers! {
-            if let controller = controller as? T {
-                return controller
-            } else {
-                continue
-            }
-        }
-        return nil
-    }
-}
-
 public extension UIImageView {
     // used for caching the images
     
