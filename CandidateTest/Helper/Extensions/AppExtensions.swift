@@ -47,3 +47,30 @@ public extension UIImageView {
                           completion: nil)
     }
 }
+
+extension UserDefaults {
+
+    static func setAddToCart(_ object: [Gift]) {
+        let objectData = try? PropertyListEncoder().encode(object)
+        UserDefaults.standard.set(objectData, forKey: "giftCart")
+        UserDefaults.standard.synchronize()
+    }
+    static func getCart() -> [Gift]? {
+        if let objectData = UserDefaults.standard.object(forKey: "giftCart") as? Data {
+            let object = try? PropertyListDecoder().decode(Array<Gift>.self, from: objectData)
+            return object
+        }
+        return nil
+    }
+}
+
+extension UIAlertController {
+    static func alert(title: String? = nil, message: String? = nil, okTap: (() -> Void)? = nil) -> UIAlertController {
+        let alert = UIAlertController(title: title ?? "Alert", message: message ?? "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (action) in
+            okTap?()
+        }))
+        
+        return alert
+    }
+}

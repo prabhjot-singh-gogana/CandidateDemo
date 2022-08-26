@@ -16,6 +16,7 @@ public protocol PSJsonDecoding {
 }
 
 public extension PSJsonDecoding where PSMapperModel: Codable {
+//    decodes Any Object into data and change into array of mapable object
     static func arrayDecoding(object: Any) -> [PSMapperModel]? {
         do {
             let json = try JSONSerialization.data(withJSONObject: object, options: .prettyPrinted)
@@ -27,7 +28,8 @@ public extension PSJsonDecoding where PSMapperModel: Codable {
             return nil
         }
     }
-    
+
+//    decodes Any Object into data and change into mapable object
     static func decode(object: Any) -> PSMapperModel? {
         do {
             let json = try JSONSerialization.data(withJSONObject: object, options: .prettyPrinted)
@@ -39,13 +41,14 @@ public extension PSJsonDecoding where PSMapperModel: Codable {
             return nil
         }
     }
+//    decodes the data  into mapable object
     static func decode(with data: Data) -> PSMapperModel? {
         return try? JSONDecoder().decode(PSMapperModel.self, from: data)
     }
 }
 
 extension Encodable {
-    /// Converting object to postable dictionary
+/// Converting object to postable dictionary
     func toJSON(_ encoder: JSONEncoder = JSONEncoder()) -> [String: Any]? {
         guard let data = try? encoder.encode(self) else { return nil }
         let object = try? JSONSerialization.jsonObject(with: data)

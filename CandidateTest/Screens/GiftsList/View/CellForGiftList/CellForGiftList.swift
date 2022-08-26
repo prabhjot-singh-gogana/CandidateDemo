@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import SkeletonView
 
 class CellForGiftList: UITableViewCell {
     
@@ -28,6 +28,7 @@ class CellForGiftList: UITableViewCell {
     
     let giftImageView:UIImageView = {
         let img = UIImageView()
+        img.isSkeletonable = true
         img.contentMode = .scaleAspectFill // image will never be strecthed vertially or horizontally
         img.translatesAutoresizingMaskIntoConstraints = false // enable autolayout
         img.layer.cornerRadius = 5
@@ -37,6 +38,7 @@ class CellForGiftList: UITableViewCell {
     
     let lblName:UILabel = {
         let label = UILabel()
+        label.isSkeletonable = true
         label.font = UIFont.boldSystemFont(ofSize: 17)
         label.numberOfLines = 1
         label.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
@@ -50,6 +52,9 @@ class CellForGiftList: UITableViewCell {
         self.contentView.addSubview(giftImageView)
         self.contentView.addSubview(lblName)
 
+        self.isSkeletonable = true
+        self.contentView.isSkeletonable = true
+        
         giftImageView.centerYAnchor.constraint(equalTo:self.contentView.centerYAnchor).isActive = true
         giftImageView.leadingAnchor.constraint(equalTo:self.contentView.leadingAnchor, constant:0).isActive = true
         giftImageView.trailingAnchor.constraint(equalTo:self.contentView.trailingAnchor, constant:0).isActive = true

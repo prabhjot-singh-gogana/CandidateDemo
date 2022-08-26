@@ -23,6 +23,7 @@ class DenominationView: UIView {
         layout.scrollDirection = .horizontal
         // set the frame and layout
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.showsHorizontalScrollIndicator = false
         // set the view to be this UICollectionView
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
@@ -55,8 +56,8 @@ class DenominationView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func setDenominations(_ denominations: [Denomination], selectDenominationHandler: @escaping ((Denomination) -> ())) {
+//    this public method to add all denominations to collection view and also calls back the denominations with isSelected true
+    func setDenominations(_ denominations: [Denomination], selectDenominationHandler: @escaping (([Denomination]) -> ())) {
         self.denominations = denominations
         let denom = BehaviorSubject<[Denomination]>.init(value: denominations)
         denom.bind(to: self.collectionView.rx.items(cellIdentifier: String(describing: CellForPrice.self), cellType: CellForPrice.self)) { row, element, cell in
@@ -72,12 +73,13 @@ class DenominationView: UIView {
                 }
                 _self.denominations[indexPath.row].isSelected = true
                 denom.onNext(_self.denominations)
-                selectDenominationHandler(_self.denominations[indexPath.row])
+                selectDenominationHandler(_self.denominations)
             }).disposed(by: self.bag)
     }
 
 }
 
+//collection view cell which will show the price on cell
 fileprivate class CellForPrice: UICollectionViewCell {
     
     var denomination: Denomination? {
@@ -87,7 +89,7 @@ fileprivate class CellForPrice: UICollectionViewCell {
                 lblPrice.text = "\(price)"
             }
             if let selected = object.isSelected {
-                self.contentView.backgroundColor = selected ? .systemBlue : #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+                self.contentView.backgroundColor = (selected) ? .systemBlue : #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
             }
         }
     }

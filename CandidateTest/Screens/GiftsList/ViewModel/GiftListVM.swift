@@ -32,6 +32,7 @@ struct GiftListVM {
                 self.loading.accept(false)
                 self.giftList$.accept(array)
             }).disposed(by: self.disposable)
+        
     }
 }
 

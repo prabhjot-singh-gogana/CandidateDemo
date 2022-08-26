@@ -7,11 +7,13 @@
 
 import RxSwift
 import RxCocoa
+import SkeletonView
 
 final class GiftListVC: UIViewController {
     private let disposeBag = DisposeBag()
     var giftListViewModel = GiftListVM()
     var tableViewGifts = UITableView()
+    let btnCart = UIButton(type: .system)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,13 +23,28 @@ final class GiftListVC: UIViewController {
         self.giftListViewModel.requestGiftData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let addedGiftCard = UserDefaults.getCart() {
+            self.btnCart.setTitle("Cart (\(addedGiftCard.count))", for: .normal)
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.btnCart)
+        }
+    }
+    
     private func bindUI() {
         
-        //uitableView Binding
+//uitableView Binding
         self.setupTableView()
         self.bindTableView()
         
-        // binding loading to vc
+// tap cart button see cards logs
+        self.btnCart.rx.tap.bind {
+            if let addedGiftCard = UserDefaults.getCart() {
+                print(addedGiftCard.map{$0.brand})
+            }
+        }.disposed(by: self.disposeBag)
+        
+// binding loading to vc
         giftListViewModel.loading
             .filter({$0==true})
             .observe(on: MainScheduler.instance).subscribe { isLoading in
@@ -35,7 +52,7 @@ final class GiftListVC: UIViewController {
             }.disposed(by: disposeBag)
         
         
-        // observing errors to show
+// observing errors to show
         giftListViewModel
             .error
             .observe(on: MainScheduler.instance)
@@ -50,11 +67,16 @@ final class GiftListVC: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    //binding the tableview datasource
+//binding the tableview datasource
     func bindTableView() {
         // binding the table with items
         self.giftListViewModel.giftList$.compactMap({$0}).bind(to: self.tableViewGifts.rx.items(cellIdentifier: String(describing: CellForGiftList.self), cellType: CellForGiftList.self)) {index, model,cell in
-            cell.gift = model
+            if self.giftListViewModel.loading.value == true {
+                cell.showGradientSkeleton()
+            } else {
+                cell.hideSkeleton()
+                cell.gift = model
+            }
         }.disposed(by: self.disposeBag)
         
         
@@ -66,7 +88,8 @@ final class GiftListVC: UIViewController {
                 self?.toDetailVC(gift: gift)
             }).disposed(by: self.disposeBag)
     }
-
+    
+// this method navigate to DetailOfGift Screen
     func toDetailVC(gift: Gift) {
         let detailVC = DetailOfGiftVC()
         detailVC.detailOfGiftVM.gift = gift
@@ -76,6 +99,7 @@ final class GiftListVC: UIViewController {
     //initialising the tableview and setup its constraints
     func setupTableView() {
         self.view.addSubview(self.tableViewGifts)
+        self.tableViewGifts.isSkeletonable = true
         self.tableViewGifts.backgroundColor = .white
         self.tableViewGifts.translatesAutoresizingMaskIntoConstraints = false
         self.tableViewGifts.topAnchor.constraint(equalTo:view.safeAreaLayoutGuide.topAnchor).isActive = true

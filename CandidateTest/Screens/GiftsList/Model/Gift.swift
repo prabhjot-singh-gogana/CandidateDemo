@@ -34,11 +34,3 @@ struct Denomination: Codable, PSJsonDecoding {
         
     }
 }
-
-enum Currency {
-    case aud
-}
-
-enum Stock {
-    case inStock
-}
